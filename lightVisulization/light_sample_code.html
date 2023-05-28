@@ -1,0 +1,69 @@
+viewer.entities.add({
+    name: "Wedge",
+    position: Cesium.Cartesian3.fromDegrees(106.776,  10.762, 12),
+    orientation: Cesium.Transforms.headingPitchRollQuaternion(
+        Cesium.Cartesian3.fromDegrees(106.776,  10.762, 6),
+        new Cesium.HeadingPitchRoll(Cesium.Math.PI / 1.5, 0, 0.0)
+    ),
+    ellipsoid: {
+        radii: new Cesium.Cartesian3(10, 10, 10),
+        innerRadii: new Cesium.Cartesian3(0.05, 0.05, 0.05),
+        minimumClock: Cesium.Math.toRadians(0),
+        maximumClock: Cesium.Math.toRadians(360),
+        minimumCone: Cesium.Math.toRadians(75.0),
+        maximumCone: Cesium.Math.toRadians(105.0),
+        material: Cesium.Color.RED.withAlpha(0.3),
+        outline: true,
+    },
+});
+
+viewer.entities.add({
+    name: "Wedge",
+    position: Cesium.Cartesian3.fromDegrees(106.776,  10.762, 12),
+    orientation: Cesium.Transforms.headingPitchRollQuaternion(
+        Cesium.Cartesian3.fromDegrees(106.776,  10.762, 6),
+        new Cesium.HeadingPitchRoll(Cesium.Math.PI / 1.5, 0, 0.0)
+    ),
+    ellipsoid: {
+        radii: new Cesium.Cartesian3(300, 300, 300),
+        innerRadii: new Cesium.Cartesian3(15, 15, 15),
+        minimumClock: Cesium.Math.toRadians(0),
+        maximumClock: Cesium.Math.toRadians(360),
+        minimumCone: Cesium.Math.toRadians(75.0),
+        maximumCone: Cesium.Math.toRadians(105.0),
+        material: Cesium.Color.YELLOW.withAlpha(0.3),
+        outline: true,
+    },
+});
+
+viewer.entities.add({
+    name: "Wedge1",
+    position: Cesium.Cartesian3.fromDegrees(106.776,  10.762, 12),
+    orientation: Cesium.Transforms.headingPitchRollQuaternion(
+        Cesium.Cartesian3.fromDegrees(106.776,  10.762, 6),
+        new Cesium.HeadingPitchRoll(Cesium.Math.PI / 1, 0, 0.0)
+    ),
+    ellipsoid: {
+        radii: new Cesium.Cartesian3(50, 50, 50),
+        innerRadii: new Cesium.Cartesian3(0.05, 0.05, 0.05),
+        minimumClock: Cesium.Math.toRadians(-30.0),
+        maximumClock: Cesium.Math.toRadians(30.0),
+        minimumCone: Cesium.Math.toRadians(120.0),
+        maximumCone: Cesium.Math.toRadians(150.0),
+        material: Cesium.Color.BLUE.withAlpha(0.5),
+        outline: true,
+    },
+});
+
+const redCone = viewer.entities.add({
+    name: "Red cone",
+    // Vị trí lat, lon, độ cao-điểm trung tâm của khối nón = lenght/2
+    position: Cesium.Cartesian3.fromDegrees(106.776,  10.762, 6),
+    cylinder: {
+        length: 12, // Chiều cao từ đỉnh xuống đáy
+        topRadius: 0,  // bán kính circle ở đỉnh
+        bottomRadius: 8, // Bán kính circle ở đáy 
+        material: Cesium.Color.YELLOW.withAlpha(0.3), 
+        // set màu sắc và độ trong suôt
+    },
+});
