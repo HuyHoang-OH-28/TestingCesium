@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <!-- Cesium -->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.80/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.80/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    
+ 
+    
+</head>
+
+<body>
+    <div id="cesiumContainer"></div>
+
+    <script>
+        
+    // Init Cesium Ion
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiYjJmMDA2NC0yY2YyLTRkOGEtOGVmYi03YmNmZmE1NzcyY2MiLCJpZCI6ODk3NzUsImlhdCI6MTY0OTkyNTEwMX0.VPFCxddX_V2UKjOJeqJszZ25c9z4HA2BSYimPLYrbWo';
+
+    // Create viewer
+    let viewer = new Cesium.Viewer('cesiumContainer', {
+       
+        baseLayerPicker: true, //  type map
+        vrButton: false,
+        geocoder: false,
+        navigationHelpButton: false,
+        selectionIndicator: true,
+        shadows: false,
+        timeline: false,
+        sceneModePicker: false, // type show map
+        animation: true,
+        skyAtmosphere : false
+    });
+    
+    viewer.scene.globe.depthTestAgainstTerrain = true;
+
+    // Set up Camera
+    const HCM_latitude = 10.762;
+    const HCM_longitude = 106.776;
+    const HCM_height = 29000;
+
+    const light = viewer.entities.add({
+        position: Cesium.Cartesian3.fromDegrees(106.776,  10.762),
+        model: {
+            uri: "../data/model/light/light.glb",
+        },
+    });
+    viewer.flyTo(light);
+
+    const redCone = viewer.entities.add({
+        name: "Red cone",
+        position: Cesium.Cartesian3.fromDegrees(106.776,  10.762, 6),
+        cylinder: {
+            length: 12,
+            topRadius: 0,
+            bottomRadius: 8,
+            material: Cesium.Color.YELLOW.withAlpha(0.3),
+        },
+    });
+
+    viewer.entities.add({
+        name: "Wedge",
+        position: Cesium.Cartesian3.fromDegrees(106.776,  10.762, 12),
+        orientation: Cesium.Transforms.headingPitchRollQuaternion(
+            Cesium.Cartesian3.fromDegrees(106.776,  10.762, 6),
+            new Cesium.HeadingPitchRoll(Cesium.Math.PI / 1.5, 0, 0.0)
+        ),
+        ellipsoid: {
+            radii: new Cesium.Cartesian3(10, 10, 10),
+            innerRadii: new Cesium.Cartesian3(0.05, 0.05, 0.05),
+            minimumClock: Cesium.Math.toRadians(0),
+            maximumClock: Cesium.Math.toRadians(360),
+            minimumCone: Cesium.Math.toRadians(75.0),
+            maximumCone: Cesium.Math.toRadians(105.0),
+            material: Cesium.Color.RED.withAlpha(0.3),
+            outline: true,
+        },
+    });
+
+    viewer.entities.add({
+        name: "Wedge",
+        position: Cesium.Cartesian3.fromDegrees(106.776,  10.762, 12),
+        orientation: Cesium.Transforms.headingPitchRollQuaternion(
+            Cesium.Cartesian3.fromDegrees(106.776,  10.762, 6),
+            new Cesium.HeadingPitchRoll(Cesium.Math.PI / 1.5, 0, 0.0)
+        ),
+        ellipsoid: {
+            radii: new Cesium.Cartesian3(300, 300, 300),
+            innerRadii: new Cesium.Cartesian3(15, 15, 15),
+            minimumClock: Cesium.Math.toRadians(0),
+            maximumClock: Cesium.Math.toRadians(360),
+            minimumCone: Cesium.Math.toRadians(75.0),
+            maximumCone: Cesium.Math.toRadians(105.0),
+            material: Cesium.Color.YELLOW.withAlpha(0.3),
+            outline: true,
+        },
+    });
+
+    viewer.entities.add({
+        name: "Wedge1",
+        position: Cesium.Cartesian3.fromDegrees(106.776,  10.762, 12),
+        orientation: Cesium.Transforms.headingPitchRollQuaternion(
+            Cesium.Cartesian3.fromDegrees(106.776,  10.762, 6),
+            new Cesium.HeadingPitchRoll(Cesium.Math.PI / 1, 0, 0.0)
+        ),
+        ellipsoid: {
+            radii: new Cesium.Cartesian3(50, 50, 50),
+            innerRadii: new Cesium.Cartesian3(0.05, 0.05, 0.05),
+            minimumClock: Cesium.Math.toRadians(-30.0),
+            maximumClock: Cesium.Math.toRadians(30.0),
+            minimumCone: Cesium.Math.toRadians(120.0),
+            maximumCone: Cesium.Math.toRadians(150.0),
+            material: Cesium.Color.BLUE.withAlpha(0.5),
+            outline: true,
+        },
+    });
+
+
+
+    </script>
+</body>
+</html>
