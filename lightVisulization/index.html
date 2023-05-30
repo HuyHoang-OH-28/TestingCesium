@@ -8,6 +8,9 @@
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.80/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     
+    <!-- Tailwind CSS-->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style type="text/css">
         body{
             height:100%;
@@ -16,33 +19,6 @@
             width: 100%;
             height: 100%;
         }
-        .form{
-            position: absolute;
-            top:0;
-            left:0;
-            margin-left: 2%;
-            margin-top: 5%;
-            background-color: black;
-            opacity: 0.7;
-            width: 300px;
-            padding:  10px 20px;
-            color: white
-        }
-        .form input{
-            width: 90%;
-            margin-top:10px;
-            padding: 5px 10px;
-            font-size: 13px;
-        }
-        .form h4{
-            font-size: 14px;
-            font-weight: bold;
-            margin-top: 10px;
-            margin-bottom: 0px;
-        }
-        h2{
-            text-align: center;
-        }
     </style>
  
     
@@ -50,140 +26,177 @@
 
 <body>
     <div id="cesiumContainer"></div>
+    <div class="absolute top-0 left-0 mt-8 bg-black/50 p-4 w-1/3">
+        <div class="form text-white text-lg">
+            <h2 class="text-2xl text-center">Điều chỉnh tham số</h2>
+            <!-- Cone Direct-->
+            <div class="grid grid-cols-2 mt-4 gap-2">
+                <div class="col-span-1">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-2">
+                            Minimum Cone
+                        </div>
+                        <div class="col-span-1">
+                            <input type="text" class="w-3/4 rounded-lg text-black text-center focus:ring-0 outline-0" id="minimumCone" value="0" onchange="updateValue(this.value,'minimumCone')"> 
+                        </div>
+                    </div>
+                    <div class="w-full mt-2 pr-4">
+                        <input type="range" class="w-full" name="rangeInput" min="0" max="360" value="0" id="inputMinimumCone" onchange="updateValue(this.value,'minimumCone')">
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-2">
+                            Cone Range
+                        </div>
+                        <div class="col-span-1">
+                            <input type="text" class="w-3/4 rounded-lg text-black text-center focus:ring-0 outline-0" id="coneRange" value="0" onchange="updateValue(this.value,'coneRange')"> 
+                        </div>
+                    </div>
+                    <div class="w-full mt-2 pr-4">
+                        <input type="range"class="w-full" name="rangeInput" min="0" max="360" value="0" id="inputConeRange" onchange="updateValue(this.value,'coneRange')">
+                    </div>
+                </div>
+            </div>
+            <!-- Clock Direct -->
+            <div class="grid grid-cols-2 mt-4 gap-2">
+                <div class="col-span-1">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-2">
+                            Minimum Clock
+                        </div>
+                        <div class="col-span-1">
+                            <input type="text" class="w-3/4 rounded-lg text-black text-center focus:ring-0 outline-0" id="minimumClock" value="0" onchange="updateValue(this.value,'minimumClock')"> 
+                        </div>
+                    </div>
+                    <div class="w-full mt-2 pr-4">
+                        <input type="range"class="w-full" name="rangeInput" min="0" max="360" value="0" id="inputminimumClock" onchange="updateValue(this.value,'minimumClock')">
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-2">
+                            Clock Range
+                        </div>
+                        <div class="col-span-1">
+                            <input type="text" class="w-3/4 rounded-lg text-black text-center focus:ring-0 outline-0" id="clockRange" value="0" onchange="updateValue(this.value,'clockRange')"> 
+                        </div>
+                    </div>
+                    <div class="w-full mt-2 pr-4">
+                        <input type="range"class="w-full" name="rangeInput" min="0" max="360" value="0" id="inputclockRange" onchange="updateValue(this.value,'clockRange')">
+                    </div>
+                </div>
+            </div>
 
-    <div class="form">
-        <h2>Điều chỉnh tham số</h2>
-        <h4>First name:</h4>
-        <input type="text" id="fname" name="fname" value="John">
-        <h4>First name:</h4>
-        <input type="text" id="fname" name="fname" value="John">
-        <h4>Minimum Cone:</h4>
-        <div>
-            <div style="width: 75%; float:left">
-                <input type="range" name="rangeInput" min="0" max="360" value="0" onchange="updateValue(this.value,'minimumCone')">
-            </div>
-            <div style="width: 20%; float:right">
-                <input type="text" id="minimumCone" value="0" style="width: 80%"> 
-            </div>
-        </div>
-        <h4> Maximum Cone:</h4>
-        <div>
-            <div style="width: 75%; float:left">
-                <input type="range" name="rangeInput" min="0" max="360" value="0" onchange="updateValue(this.value,'maximumCone')">
-            </div>
-            <div style="width: 20%; float:right">
-                <input type="text" id="maximumCone" value="0" style="width: 80%"> 
-            </div>
-        </div>
-        <div>
-            <h4> Minimum Clock:</h4>
-            <div>
-                <div style="width: 75%; float:left">
-                    <input type="range" name="rangeInput" min="0" max="360" value="0" onchange="updateValue(this.value,'minimumClock')">
+            <!-- Radii paramets -->
+            <div class="grid grid-cols-3 mt-4 gap-2">
+                <div class="col-span-1">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-1">
+                            X
+                        </div>
+                        <div class="col-span-2">
+                            <input type="text" class="w-3/4 rounded-lg text-black text-center focus:ring-0 outline-0" id="x" value="0" onchange="updateValue(this.value,'x')"> 
+                        </div>
+                    </div>
+                    <div class="w-full mt-2 pr-4">
+                        <input type="range"class="w-full" name="rangeInput" min="0" max="360" value="0" id="xRange" onchange="updateValue(this.value,'x')">
+                    </div>
                 </div>
-                <div style="width: 20%; float:right">
-                    <input type="text" id="minimumClock" value="0" style="width: 80%"> 
+                <div class="col-span-1">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-1">
+                            Y
+                        </div>
+                        <div class="col-span-2">
+                            <input type="text" class="w-3/4 rounded-lg text-black text-center focus:ring-0 outline-0" id="y" value="0" onchange="updateValue(this.value,'y')"> 
+                        </div>
+                    </div>
+                    <div class="w-full mt-2 pr-4">
+                        <input type="range"class="w-full" name="rangeInput" min="0" max="360" value="0" id="yRange" onchange="updateValue(this.value,'y')">
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div>
-            <h4>Maximum Clock:</h4>
-            <div>
-                <div style="width: 75%; float:left">
-                    <input type="range" name="rangeInput" min="0" max="360" value="0" onchange="updateValue(this.value,'maximumClock')">
-                </div>
-                <div style="width: 20%; float:right">
-                    <input type="text" id="maximumClock" value="0" style="width: 80%"> 
+                <div class="col-span-1">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-1">
+                            Z
+                        </div>
+                        <div class="col-span-2">
+                            <input type="text" class="w-3/4 rounded-lg text-black text-center focus:ring-0 outline-0" id="z" value="0" onchange="updateValue(this.value,'z')"> 
+                        </div>
+                    </div>
+                    <div class="w-full mt-2 pr-4">
+                        <input type="range"class="w-full" name="rangeInput" min="0" max="360" value="0" id="zRange" onchange="updateValue(this.value,'z')">
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        
-        
-       
 
-    
-        
+        </div>
     </div>
-    <script>
-   
-    // Init Cesium Ion
-    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiYjJmMDA2NC0yY2YyLTRkOGEtOGVmYi03YmNmZmE1NzcyY2MiLCJpZCI6ODk3NzUsImlhdCI6MTY0OTkyNTEwMX0.VPFCxddX_V2UKjOJeqJszZ25c9z4HA2BSYimPLYrbWo';
-
-    // Create viewer
-    let viewer = new Cesium.Viewer('cesiumContainer', {
-       
-        baseLayerPicker: true, //  type map
-        vrButton: false,
-        geocoder: false,
-        navigationHelpButton: false,
-        selectionIndicator: true,
-        shadows: false,
-        timeline: false,
-        sceneModePicker: false, // type show map
-        animation: true,
-        skyAtmosphere : false
-    });
     
-    viewer.scene.globe.depthTestAgainstTerrain = true;
+    <script type="text/javascript" src="../Common/init_environment.js"></script>
+    <script type="text/javascript" src="./light.js"></script>
 
-    // Set up Camera
-    const HCM_latitude = 10.762;
-    const HCM_longitude = 106.776;
-    const HCM_height = 29000;
 
-    const light = viewer.entities.add({
-        position: Cesium.Cartesian3.fromDegrees(106.776,  10.762),
-        model: {
-            uri: "../data/model/light/light.glb",
-        },
-    });
-    viewer.flyTo(light);
+    <script>
+        document.getElementById("minimumCone").value = cone_direct.min;
+        document.getElementById("inputMinimumCone").value = cone_direct.min;
 
-    let light_bright = viewer.entities.add({
-        name: "light_bright",
-        position: Cesium.Cartesian3.fromDegrees(106.776,  10.762, 12),
-        orientation: Cesium.Transforms.headingPitchRollQuaternion(
-            Cesium.Cartesian3.fromDegrees(106.776,  10.762, 6),
-            new Cesium.HeadingPitchRoll(Cesium.Math.PI / 1, 0, 0.0)
-            ),
-        ellipsoid: {
-            radii: new Cesium.Cartesian3(10, 10, 20),
-            innerRadii: new Cesium.Cartesian3(0.05, 0.05, 0.05),
-            minimumClock: Cesium.Math.toRadians(-30.0),
-            maximumClock: Cesium.Math.toRadians(30.0),
-            minimumCone: Cesium.Math.toRadians(120),
-            maximumCone: Cesium.Math.toRadians(150),
-            material: Cesium.Color.BLUE.withAlpha(0.5),
-            outline: true,
-        },
-    });
-    console.log(light_bright)
+        document.getElementById("coneRange").value = cone_direct.range;
+        document.getElementById("inputConeRange").value = cone_direct.range;
 
-    function updateValue(value, param_name){
-        console.log(value);
-        console.log(param_name);
-        document.getElementById(param_name).value = value;
-        switch (param_name){
-            case 'minimumClock':
-                light_bright.ellipsoid.minimumClock = Cesium.Math.toRadians(value);
-                break;
-            case 'maximumClock':
-                light_bright.ellipsoid.maximumClock = Cesium.Math.toRadians(value);
-                break;
-            case 'minimumCone':
-                light_bright.ellipsoid.minimumCone = Cesium.Math.toRadians(value);
-                break;    
-            case 'maximumCone':
-                light_bright.ellipsoid.maximumCone = Cesium.Math.toRadians(value);
-                break;
-            default:
-                break;
+        document.getElementById("minimumClock").value = clock_direct.min;
+        document.getElementById("inputminimumClock").value = clock_direct.min;
+
+        document.getElementById("clockRange").value = clock_direct.range;
+        document.getElementById("inputclockRange").value = clock_direct.range;
+
+        document.getElementById("x").value = radii.x;
+        document.getElementById("xRange").value = radii.x;
+
+        document.getElementById("y").value = radii.y;
+        document.getElementById("yRange").value = radii.y;
+
+        document.getElementById("z").value = radii.z;
+        document.getElementById("zRange").value = radii.z;
+
+    </script>
+    <script>
+        function updateValue(value, param_name){
+            console.log(value);
+            console.log(param_name);
+            document.getElementById(param_name).value = value;
+
+            switch (param_name){
+                case 'minimumCone':
+                    cone_direct.min = Number(value);
+                    break;
+                case 'coneRange':
+                    cone_direct.range = Number(value);
+                    break;
+                case 'minimumClock':
+                    clock_direct.min = Number(value);
+                    break;    
+                case 'clockRange':
+                    clock_direct.range = Number(value);
+                    break;
+                case 'x':
+                    radii.x = Number(value);
+                    break;
+                case 'y':
+                    radii.y = Number(value);
+                    break;
+                case 'z':
+                    radii.z = Number(value);
+                    break;
+                default:
+                    break;
+            }
+            //console.log(radii);
+            //console.log(cone_direct);
+            //console.log(clock_direct);
+            update_parameter_for_model(light_bright);
         }
-    }
-
-   
-
     </script>
 </body>
 </html>
